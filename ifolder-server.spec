@@ -58,9 +58,7 @@ find -name .svn -print0 | xargs -0 rm -rf
 %{__autoconf}
 %{__automake}
 %configure \
-	--libexecdir=%{libexecdir} \
-	--sysconfdir=%{sysconfdir} \
-	--with-simiasdatadir=%{simiasdatadir}
+	--with-simiasdatadir=%{_simiasdatadir}
 #  --with-ndoc-path=PATH        path to dir that contains NDocConsole.exe [NONE]
 #  --with-client-setup     configure simias to run as a client. [Default=FALSE]
 #  --with-pic              try to use only PIC/non-PIC objects [default=use both]
