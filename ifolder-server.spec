@@ -12,11 +12,9 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	compat-libstdc++-3.1
 BuildRequires:	e2fsprogs-devel
-BuildRequires:	gcc-c++
 BuildRequires:	glib2-devel
 BuildRequires:	intltool
 BuildRequires:	libflaim-devel
-BuildRequires:	libstdc++
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel
