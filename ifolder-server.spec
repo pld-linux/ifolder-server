@@ -4,7 +4,7 @@ Summary:	Server IFolder
 Summary(pl):	Server IFolder
 Name:		ifolder3-server
 Version:	3.5.6089.1
-Release:	0.1
+Release:	0.2
 License:	GPL v2
 Group:		Applications
 Source0:	http://forgeftp.novell.com/ifolder/server/3.5/20060330-000/src/%{name}-%{version}.tar.gz
@@ -54,7 +54,6 @@ This is the package containing the header files for simias library.
 %{__aclocal}
 %{__autoconf}
 %{__automake}
-#%build
 %configure \
 	--with-simiasdatadir=%{_simiasdatadir}
 
@@ -62,9 +61,7 @@ This is the package containing the header files for simias library.
 #  --with-client-setup     configure simias to run as a client. [Default=FALSE]
 #  --with-pic              try to use only PIC/non-PIC objects [default=use both]
 
-%{__make} -C src/core/libsimias # hack
-%{__make} -C src/core/libsimias # hack
-%{__make}
+%{__make} -j1
 
 %install
 rm -rf $RPM_BUILD_ROOT
