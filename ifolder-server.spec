@@ -1,3 +1,5 @@
+# TODO
+# - make use of libflaim-shared
 Summary:	Server IFolder
 Summary(pl):	Server IFolder
 Name:		ifolder3-server
@@ -10,59 +12,57 @@ Source0:	http://forgeftp.novell.com/ifolder/server/3.5/20060330-000/src/%{name}-
 URL:		http://www.ifolder.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	compat-libstdc++-3.1
-BuildRequires:	e2fsprogs-devel
-BuildRequires:	glib2-devel
-BuildRequires:	intltool
-BuildRequires:	libflaim-devel
+BuildRequires:	libflaim-static
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel
-BuildRequires:	log4net-devel
-BuildRequires:	mono
+BuildRequires:	log4net
 BuildRequires:	mono-compat-links
 BuildRequires:	mono-devel
 BuildRequires:	pkgconfig
-BuildRequires:	rpmbuild(macros) >= 1.228
-Requires(post,preun):	/sbin/chkconfig
-#Requires:	log4net
-#Requires:	mono-core >= 1.1.8
-#Requires:	mono-data >= 1.1.8
-#Requires:	mono-web >= 1.1.8
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir		/etc/ifolder3
-%define		_libexecdir		/usr/lib/ifolder3
+%define		_libexecdir		%{_prefix}/%{_lib}/ifolder3
 %define		_simiasdatadir	/var/lib/ifolder3
 
 %description
 iFolder is a simple and secure storage solution that can increase your
 productivity by enabling you to back up, access and manage your
 personal files from anywhere, at anytime. Once you have installed
-iFolder, you simply save your files locally as you have always
-done and iFolder automatically updates the files on a network server
-and delivers them to the other machines you use.
+iFolder, you simply save your files locally as you have always done
+and iFolder automatically updates the files on a network server and
+delivers them to the other machines you use.
 
 Sponsored by Novell, the iFolder project is built on the mono/.Net
 framework to integrate seamlessly into existing desktop environments
 
+%package devel
+Summary:	Header files for simias library
+Summary(pl):	Pliki nag³ówkowe biblioteki simias
+Group:		Development/Libraries
+
+%description devel
+This is the package containing the header files for simias library.
+
 %prep
 %setup -q
-
-# remove svn control files
-find -name .svn -print0 | xargs -0 rm -rf
 
 %build
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__automake}
+#%build
 %configure \
 	--with-simiasdatadir=%{_simiasdatadir}
+
 #  --with-ndoc-path=PATH        path to dir that contains NDocConsole.exe [NONE]
 #  --with-client-setup     configure simias to run as a client. [Default=FALSE]
 #  --with-pic              try to use only PIC/non-PIC objects [default=use both]
 
+%{__make} -C src/core/libsimias # hack
+%{__make} -C src/core/libsimias # hack
 %{__make}
 
 %install
@@ -79,6 +79,51 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS CREDITS ChangeLog NEWS README THANKS TODO
+%doc AUTHORS ChangeLog NEWS README
+%dir %{_sysconfdir}
+%{_sysconfdir}/Simias.config
+%{_sysconfdir}/Simias.log4net
+%dir %{_sysconfdir}/bill
+%{_sysconfdir}/bill/Simias.config
+%dir %{_sysconfdir}/bill/modules
+%{_sysconfdir}/bill/modules/Simias.Server.conf
+%{_sysconfdir}/defaults.config
+%{_sysconfdir}/ifolder_admin.conf
+%{_sysconfdir}/ifolder_webaccess.conf
+%{_sysconfdir}/simias_server.conf
+%attr(755,root,root) %{_bindir}/SimiasDirectoryMapping
+%attr(755,root,root) %{_bindir}/simias
+%attr(755,root,root) %{_bindir}/simias-create-user
+%attr(755,root,root) %{_bindir}/simias-delete-user
+%attr(755,root,root) %{_bindir}/simias-user
+%attr(755,root,root) %{_bindir}/simiasserver
+%attr(755,root,root) %{_libdir}/libFlaimWrapper.so.*.*.*
+%attr(755,root,root) %{_libdir}/libsimias-event.so.*.*.*
+%attr(755,root,root) %{_libdir}/libsimias.so.*.*.*
+%dir %{_libdir}/ifolder3
+%{_libdir}/ifolder3/admin
+%{_libdir}/ifolder3/bin
+%{_libdir}/ifolder3/web
+%{_libdir}/ifolder3/webaccess
+
+%files devel
+%defattr(644,root,root,755)
+%{_pkgconfigdir}/simias-client-c.pc
+%{_pkgconfigdir}/simias-client.pc
+%{_pkgconfigdir}/simias.pc
+%dir %{_includedir}/simias
+%{_includedir}/simias/simias-event-client.h
+%{_includedir}/simias/simias-manager.h
+%{_includedir}/simias/simias.h
+%{_includedir}/simias/simias.nsmap
+%{_includedir}/simias/simiasH.h
+%{_includedir}/simias/simiasStub.h
+%{_includedir}/simias/simiasweb.h
+%{_includedir}/simias/stdsoap2.h
+
+#%{_libdir}/libsimias-manager.a
