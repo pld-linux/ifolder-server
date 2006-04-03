@@ -12,6 +12,7 @@ Source0:	http://forgeftp.novell.com/ifolder/server/3.5/20060330-000/src/%{name}-
 URL:		http://www.ifolder.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
+Buildrequires:	libuuid-devel
 BuildRequires:	libflaim-static
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
