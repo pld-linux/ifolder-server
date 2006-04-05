@@ -1,7 +1,7 @@
 # TODO
 # - make use of libflaim-shared
-Summary:	Server IFolder
-Summary(pl):	Server IFolder
+Summary:	iFolder server
+Summary(pl):	Serwer iFolder
 Name:		ifolder3-server
 Version:	3.5.6089.1
 Release:	0.2
@@ -12,10 +12,10 @@ Source0:	http://forgeftp.novell.com/ifolder/server/3.5/20060330-000/src/%{name}-
 URL:		http://www.ifolder.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
-Buildrequires:	libuuid-devel
 BuildRequires:	libflaim-static
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
+Buildrequires:	libuuid-devel
 BuildRequires:	libxml2-devel
 BuildRequires:	log4net
 BuildRequires:	mono-compat-links
@@ -24,8 +24,8 @@ BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir		/etc/ifolder3
-%define		_libexecdir		%{_prefix}/%{_lib}/ifolder3
-%define		_simiasdatadir	/var/lib/ifolder3
+%define		_libexecdir		%{_libdir}/ifolder3
+%define		_simiasdatadir		/var/lib/ifolder3
 
 %description
 iFolder is a simple and secure storage solution that can increase your
@@ -35,8 +35,20 @@ iFolder, you simply save your files locally as you have always done
 and iFolder automatically updates the files on a network server and
 delivers them to the other machines you use.
 
-Sponsored by Novell, the iFolder project is built on the mono/.Net
-framework to integrate seamlessly into existing desktop environments
+Sponsored by Novell, the iFolder project is built on the mono/.NET
+framework to integrate seamlessly into existing desktop environments.
+
+%description -l pl
+iFolder to proste i bezpieczne rozwi±zanie przechowywania danych
+zwiêkszaj±ce produktywno¶æ pozwalaj±c zapisywaæ, odczytywaæ i
+zarz±dzaæ swoimi plikami z dowolnego miejsca w dowolnym czasie. Po
+zainstalowaniu iFoldera wystarczy zapisywaæ swoje pliki lokalnie, tak
+jak zawsze, a iFolder automatycznie uaktualni pliki na serwerze
+sieciowym i dostarczy je na inne u¿ywane przez nas maszyny.
+
+Projekt iFolder, sponsorowany przez Novella, jest stworzony w oparciu
+o ¶rodowisko mono/.NET tak, aby integrowa³ siê z istniej±cymi
+¶rodowiskami biurowymi.
 
 %package devel
 Summary:	Header files for simias library
@@ -45,6 +57,9 @@ Group:		Development/Libraries
 
 %description devel
 This is the package containing the header files for simias library.
+
+%description devel -l pl
+Ten pakiet zawiera pliki nag³ówkowe biblioteki simias.
 
 %prep
 %setup -q
@@ -84,16 +99,16 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
 %dir %{_sysconfdir}
-%{_sysconfdir}/Simias.config
-%{_sysconfdir}/Simias.log4net
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/Simias.config
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/Simias.log4net
 %dir %{_sysconfdir}/bill
-%{_sysconfdir}/bill/Simias.config
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/bill/Simias.config
 %dir %{_sysconfdir}/bill/modules
-%{_sysconfdir}/bill/modules/Simias.Server.conf
-%{_sysconfdir}/defaults.config
-%{_sysconfdir}/ifolder_admin.conf
-%{_sysconfdir}/ifolder_webaccess.conf
-%{_sysconfdir}/simias_server.conf
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/bill/modules/Simias.Server.conf
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/defaults.config
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/ifolder_admin.conf
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/ifolder_webaccess.conf
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/simias_server.conf
 %attr(755,root,root) %{_bindir}/SimiasDirectoryMapping
 %attr(755,root,root) %{_bindir}/simias
 %attr(755,root,root) %{_bindir}/simias-create-user
@@ -111,9 +126,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%{_pkgconfigdir}/simias-client-c.pc
-%{_pkgconfigdir}/simias-client.pc
-%{_pkgconfigdir}/simias.pc
 %dir %{_includedir}/simias
 %{_includedir}/simias/simias-event-client.h
 %{_includedir}/simias/simias-manager.h
@@ -123,5 +135,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/simias/simiasStub.h
 %{_includedir}/simias/simiasweb.h
 %{_includedir}/simias/stdsoap2.h
+%{_pkgconfigdir}/simias-client-c.pc
+%{_pkgconfigdir}/simias-client.pc
+%{_pkgconfigdir}/simias.pc
 
 #%{_libdir}/libsimias-manager.a
