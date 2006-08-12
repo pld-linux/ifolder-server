@@ -72,9 +72,9 @@ Ten pakiet zawiera pliki nag³ówkowe biblioteki simias.
 %configure \
 	--with-simiasdatadir=%{_simiasdatadir}
 
-#  --with-ndoc-path=PATH        path to dir that contains NDocConsole.exe [NONE]
-#  --with-client-setup     configure simias to run as a client. [Default=FALSE]
-#  --with-pic              try to use only PIC/non-PIC objects [default=use both]
+# --with-ndoc-path=PATH	path to dir that contains NDocConsole.exe [NONE]
+# --with-client-setup	configure simias to run as a client. [Default=FALSE]
+# --with-pic		try to use only PIC/non-PIC objects [default=use both]
 
 %{__make} -j1
 
