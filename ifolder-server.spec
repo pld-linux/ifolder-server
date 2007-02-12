@@ -1,7 +1,7 @@
 # TODO
 # - make use of libflaim-shared
 Summary:	iFolder server
-Summary(pl):	Serwer iFolder
+Summary(pl.UTF-8):   Serwer iFolder
 Name:		ifolder3-server
 Version:	3.5.6089.1
 Release:	0.2
@@ -38,28 +38,28 @@ delivers them to the other machines you use.
 Sponsored by Novell, the iFolder project is built on the mono/.NET
 framework to integrate seamlessly into existing desktop environments.
 
-%description -l pl
-iFolder to proste i bezpieczne rozwi±zanie przechowywania danych
-zwiêkszaj±ce produktywno¶æ pozwalaj±c zapisywaæ, odczytywaæ i
-zarz±dzaæ swoimi plikami z dowolnego miejsca w dowolnym czasie. Po
-zainstalowaniu iFoldera wystarczy zapisywaæ swoje pliki lokalnie, tak
+%description -l pl.UTF-8
+iFolder to proste i bezpieczne rozwiÄ…zanie przechowywania danych
+zwiÄ™kszajÄ…ce produktywnoÅ›Ä‡ pozwalajÄ…c zapisywaÄ‡, odczytywaÄ‡ i
+zarzÄ…dzaÄ‡ swoimi plikami z dowolnego miejsca w dowolnym czasie. Po
+zainstalowaniu iFoldera wystarczy zapisywaÄ‡ swoje pliki lokalnie, tak
 jak zawsze, a iFolder automatycznie uaktualni pliki na serwerze
-sieciowym i dostarczy je na inne u¿ywane przez nas maszyny.
+sieciowym i dostarczy je na inne uÅ¼ywane przez nas maszyny.
 
 Projekt iFolder, sponsorowany przez Novella, jest stworzony w oparciu
-o ¶rodowisko mono/.NET tak, aby integrowa³ siê z istniej±cymi
-¶rodowiskami biurowymi.
+o Å›rodowisko mono/.NET tak, aby integrowaÅ‚ siÄ™ z istniejÄ…cymi
+Å›rodowiskami biurowymi.
 
 %package devel
 Summary:	Header files for simias library
-Summary(pl):	Pliki nag³ówkowe biblioteki simias
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe biblioteki simias
 Group:		Development/Libraries
 
 %description devel
 This is the package containing the header files for simias library.
 
-%description devel -l pl
-Ten pakiet zawiera pliki nag³ówkowe biblioteki simias.
+%description devel -l pl.UTF-8
+Ten pakiet zawiera pliki nagÅ‚Ã³wkowe biblioteki simias.
 
 %prep
 %setup -q
