@@ -1,7 +1,7 @@
 # TODO
 # - make use of libflaim-shared
 Summary:	iFolder server
-Summary(pl.UTF-8):   Serwer iFolder
+Summary(pl.UTF-8):	Serwer iFolder
 Name:		ifolder3-server
 Version:	3.5.6089.1
 Release:	0.2
@@ -52,7 +52,7 @@ o środowisko mono/.NET tak, aby integrował się z istniejącymi
 
 %package devel
 Summary:	Header files for simias library
-Summary(pl.UTF-8):   Pliki nagłówkowe biblioteki simias
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki simias
 Group:		Development/Libraries
 
 %description devel
