@@ -15,7 +15,7 @@ BuildRequires:	automake
 BuildRequires:	libflaim-static
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
-Buildrequires:	libuuid-devel
+BuildRequires:	libuuid-devel
 BuildRequires:	libxml2-devel
 BuildRequires:	log4net
 BuildRequires:	mono-compat-links
